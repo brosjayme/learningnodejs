@@ -4,7 +4,7 @@
 3. Create a txt file to save the user input using the native fs node module.
 */
 import inquirer from "inquirer";
-import qr from "qr-image";
+// import qr from "qr-image";
 import fs from "fs";
 // var qr = require("qr-image");
 inquirer
@@ -13,6 +13,11 @@ inquirer
     const url = answers.URL;
     var qr_svg = qr.image("url");
     qr_svg.pipe(fs.createWriteStream("qr_img.png"));
+
+    fs.writeFile("URL.txt", url, (err) => {
+      if (err) throw err;
+      console.log("the file has been saved!");
+    });
   })
   .catch((error) => {
     if (error.isTtyError) {
